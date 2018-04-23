@@ -26,6 +26,13 @@ public class BoardColumn : MonoBehaviour {
 	[SerializeField]
 	private LayerMask gemLayerMask;
 
+	[SerializeField]
+	private Color targetingColor;
+	[SerializeField]
+	private Color normalColor;
+
+	private Collider2D playerCollider;
+
 	public void SetColNum(int colNum) {
 
 		columnNumber = colNum;
@@ -40,6 +47,14 @@ public class BoardColumn : MonoBehaviour {
 
 		this.signalSprite.transform.position = this.nextSpawnPosition;
 		this.signalSprite.enabled = signalEnabled;
+
+		this.spriteRenderer.enabled = signalEnabled;
+		this.spriteRenderer.color = signalEnabled ? this.targetingColor : normalColor;
+
+		if (signalEnabled == false && this.playerCollider != null) {
+
+			CheckCenterBounds(this.playerCollider);
+		}
 	}
 
 	// Use this for initialization
@@ -62,21 +77,24 @@ public class BoardColumn : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "Player") {
 
-			CheckCenterBounds(other);
+			this.playerCollider = other;
+			CheckCenterBounds(this.playerCollider);
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D other) {
 		if (other.tag == "Player") {
 
-			CheckCenterBounds(other);
+			this.playerCollider = other;
+			CheckCenterBounds(this.playerCollider);
 		}
 	}
 
 	void OnTriggerStay2D(Collider2D other) {
 		if (other.tag == "Player") {
 
-			CheckCenterBounds(other);
+			this.playerCollider = other;
+			CheckCenterBounds(this.playerCollider);
 		}
 	}
 
@@ -125,6 +143,11 @@ public class BoardColumn : MonoBehaviour {
 				}
 			}
 			index++;
+		}
+
+		if (index >= slotHeights.Length) {
+
+			GameManager.instance.GameOver ();
 		}
 
 		this.nextSpawnPosition = new Vector2 (this.transform.position.x, this.slotHeights [index]);
