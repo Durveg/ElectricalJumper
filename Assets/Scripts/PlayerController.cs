@@ -107,9 +107,10 @@ public class PlayerController : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.Space)) {
 
-			this.jumpSound.Play ();
+
 			if (wallSlinding) {
 
+				this.jumpSound.Play ();
 				if (wallDirX == input.x) {
 					velocity.x = -wallDirX * wallJumpClimb.x;
 					velocity.y = wallJumpClimb.y;
@@ -124,6 +125,8 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 			else if (controller.collisions.below) {
+
+				this.jumpSound.Play ();
 				velocity.y = jumpVelocity;
 			}
 			else if(this.playerData.holdingGem == true) {
