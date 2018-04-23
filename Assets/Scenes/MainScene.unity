@@ -30469,7 +30469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardBottom: {fileID: 240885674}
-  boardWidth: 10
+  boardWidth: 12
   boardHeight: 10
   spawnSpeed: 2
   spawnColors:
@@ -35566,7 +35566,7 @@ MonoBehaviour:
   blueColor: {r: 0, g: 0.7411765, b: 0.8901961, a: 1}
   greenColor: {r: 0, g: 1, b: 0.047058824, a: 1}
   orangeColor: {r: 1, g: 0.7647059, b: 0, a: 1}
-  powerLevelDegradeRate: 0.5
+  powerLevelDegradeRate: 0.75
   match3: 8
   match4: 12
   match5: 18

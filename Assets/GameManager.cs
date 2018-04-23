@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour {
 
 	public int score = 0;
 
+	private bool gameOverPlayed = false;
+
 	public void GameOver() {
 
 		SoundManager.PlayGameOver();
@@ -111,14 +113,18 @@ public class GameManager : MonoBehaviour {
 		greenSliderValue -= this.powerLevelDegradeRate * Time.deltaTime;
 		orangeSliderValue -= this.powerLevelDegradeRate * Time.deltaTime;
 
-		if (redSliderValue == 0 || blueSliderValue == 0 || greenSliderValue == 0 || orangeSliderValue == 0) {
+		if (redSliderValue <= 0 || blueSliderValue <= 0 || greenSliderValue <= 0 || orangeSliderValue <= 0) {
 
-			SoundManager.PlayGameOver();
+			if (gameOverPlayed == false) {
+			
+				gameOverPlayed = true;
+				SoundManager.PlayGameOver ();
 
-			inGameUI.gameObject.SetActive (false);
-			GameOverUI.gameObject.SetActive (true);
-			GameOverUI.GetComponent<GameOverUI> ().scoreText.text = this.score.ToString ();
-			Time.timeScale = 0;
+				inGameUI.gameObject.SetActive (false);
+				GameOverUI.gameObject.SetActive (true);
+				GameOverUI.GetComponent<GameOverUI> ().scoreText.text = this.score.ToString ();
+				Time.timeScale = 0;
+			}
 		}
 	}
 }
