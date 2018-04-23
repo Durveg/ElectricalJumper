@@ -116,7 +116,6 @@ public class BoardSpawner : MonoBehaviour {
 		while (true) {
 
 			float waitBeforeSignalTime = Mathf.Lerp (timeBetweenSpawnsMax, timeBetweenSpawnsMin, spawnSpeed);
-			Debug.Log ("Time before signal: " + waitBeforeSignalTime);
 			if (spawnSpeed < 1) {
 
 				spawnSpeed += Time.deltaTime / timeToMaxSpawnSpeedSec;
@@ -129,7 +128,6 @@ public class BoardSpawner : MonoBehaviour {
 
 
 			float delayTimer = Mathf.Lerp (delayBeforeFallMax, delayBeforeFallMin, delaySpeed);
-			Debug.Log ("Time before delay over: " + delayTimer);
 			if (delaySpeed < 1) {
 
 				delaySpeed += Time.deltaTime / timeToMinDelay;
