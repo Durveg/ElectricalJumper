@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class PlayerData : ScriptableObject {
 
+	public int facingDir;
+
 	public Vector2 input;
 
 	public Gem highlightedGem;

@@ -76,7 +76,7 @@ public class HighlightNearby : MonoBehaviour {
 		RaycastHit2D right = RightCollision(raySize);
 		RaycastHit2D down = DownCollision(raySize);
 
-		if (playerData.input.x == -1 && controller.collisions.left && left.collider != null) {
+		if (playerData.facingDir == -1 && controller.collisions.left && left.collider != null) {
 
 			Gem leftGem = left.transform.GetComponent<Gem> ();
 
@@ -87,7 +87,7 @@ public class HighlightNearby : MonoBehaviour {
 
 			playerData.highlightedGem = leftGem;
 			leftGem.EnableHighlighting ();
-		} else if (playerData.input.x == 1 && controller.collisions.right && right.collider != null) {
+		} else if (playerData.facingDir == 1 && controller.collisions.right && right.collider != null) {
 
 			Gem rightGem = right.transform.GetComponent<Gem> ();
 

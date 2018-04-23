@@ -41,8 +41,6 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField]
 	private Vector2 heldPosition;
 
-
-
 	private float gravity;
 	private float jumpVelocity;
 
@@ -125,13 +123,22 @@ public class PlayerController : MonoBehaviour {
 					velocity.y = wallLeap.y;
 				}
 			}
-
-			if (controller.collisions.below) {
+			else if (controller.collisions.below) {
 				velocity.y = jumpVelocity;
+			}
+			else if(this.playerData.holdingGem == true) {
+
+				this.jumpSound.Play ();
+
+				Vector2 throwPosition = new Vector2 (this.playerData.boardColumn.transform.position.x, this.transform.position.y);
+				this.transform.position = new Vector2 (this.transform.position.x, this.transform.position.y + throwItemDisplacementHeight);
+				velocity.y = throwItemVelocity;
+
+				this.playerData.ThrowItem().ThrowDownwards (throwPosition);
 			}
 		}
 
-		if (Input.GetKeyDown (KeyCode.F)) {
+		if (Input.GetKeyDown (KeyCode.LeftShift)) {
 
 			if (playerData.highlightedGem != null && this.playerData.holdingGem == true) {
 
@@ -147,17 +154,6 @@ public class PlayerController : MonoBehaviour {
 				playerData.highlightedGem.PickUp (this.transform, this.heldPosition);
 				this.playerData.HoldItem (playerData.highlightedGem);
 			}
-		}
-
-		if(Input.GetKeyDown(KeyCode.Q)) {
-
-			this.jumpSound.Play ();
-
-			Vector2 throwPosition = new Vector2 (this.playerData.boardColumn.transform.position.x, this.transform.position.y);
-			this.transform.position = new Vector2 (this.transform.position.x, this.transform.position.y + throwItemDisplacementHeight);
-			velocity.y = throwItemVelocity;
-
-			this.playerData.ThrowItem().ThrowDownwards (throwPosition);
 		}
 			
 		velocity.y += gravity * Time.deltaTime;

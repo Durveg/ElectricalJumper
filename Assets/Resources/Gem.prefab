@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb30d8da09680477ebaf8d5d952c15f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallSpeed: 20
+  fallSpeed: 10
   highLightSprite: {fileID: 212248647552403972}
   isFalling: 1
   spawnFalling: 1

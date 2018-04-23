@@ -19201,6 +19201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   standingOn: {fileID: 0}
+  playerData: {fileID: 11400000, guid: 7d9fe1d0cd49a4dd587d5be7431b62ef, type: 2}
   horizontalRayCount: 8
   verticalRayCount: 8
   collisionMask:

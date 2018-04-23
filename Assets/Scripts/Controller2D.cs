@@ -10,6 +10,9 @@ public class Controller2D : MonoBehaviour {
 	public GameObject standingOn;
 
 	[SerializeField]
+	public PlayerData playerData;
+
+	[SerializeField]
 	private int horizontalRayCount = 4;
 	[SerializeField]
 	private int verticalRayCount = 4;
@@ -32,6 +35,7 @@ public class Controller2D : MonoBehaviour {
 		if (velocity.x != 0) {
 
 			this.collisions.facingDir = (int)Mathf.Sign (velocity.x);
+			playerData.facingDir = (int)Mathf.Sign (velocity.x);
 		}
 
 		HorizontalCollisions (ref velocity);
