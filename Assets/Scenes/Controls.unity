@@ -442,16 +442,19 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Arrows to move
+  m_Text: 'Left and right arrows to move
 
 
-    Shift to pick up or swap with highlighted power cube
+    [Z] to pick up or swap with highlighted power cube
+
+
+    [X] place cube on the ground
 
 
     Space to jump
 
 
-    Space again in the air to throw held cube at the ground'
+    Space in the air to throw held cube at the ground'
 --- !u!222 &1447286602
 CanvasRenderer:
   m_ObjectHideFlags: 0

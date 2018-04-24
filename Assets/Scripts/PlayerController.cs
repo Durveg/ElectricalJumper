@@ -131,17 +131,11 @@ public class PlayerController : MonoBehaviour {
 			}
 			else if(this.playerData.holdingGem == true) {
 
-				this.jumpSound.Play ();
-
-				Vector2 throwPosition = new Vector2 (this.playerData.boardColumn.transform.position.x, this.transform.position.y);
-				this.transform.position = new Vector2 (this.transform.position.x, this.transform.position.y + throwItemDisplacementHeight);
-				velocity.y = throwItemVelocity;
-
-				this.playerData.ThrowItem().ThrowDownwards (throwPosition);
+				this.AttemptThrowCube();
 			}
 		}
 
-		if (Input.GetKeyDown (KeyCode.LeftShift)) {
+		if (Input.GetKeyDown (KeyCode.Z)) {
 
 			if (playerData.highlightedGem != null && this.playerData.holdingGem == true) {
 
@@ -159,7 +153,23 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 			
+		if (Input.GetKeyDown (KeyCode.X) && this.playerData.holdingGem == true) {
+
+			this.AttemptThrowCube();
+		}
+
 		velocity.y += gravity * Time.deltaTime;
 		controller.Move (velocity * Time.deltaTime);
+	}
+
+	private void AttemptThrowCube() {
+
+		this.jumpSound.Play ();
+
+		Vector2 throwPosition = new Vector2 (this.playerData.boardColumn.transform.position.x, this.transform.position.y);
+		this.transform.position = new Vector2 (this.transform.position.x, this.transform.position.y + throwItemDisplacementHeight);
+		velocity.y = throwItemVelocity;
+
+		this.playerData.ThrowItem().ThrowDownwards (throwPosition);
 	}
 }

@@ -85,15 +85,19 @@ public class GameManager : MonoBehaviour {
 		if (color == "red") {
 
 			this.redSliderValue += increaseAmount;
+			Mathf.Clamp (this.redSliderValue, 0, 100);
 		} else if (color == "blue") {
 
 			this.blueSliderValue += increaseAmount;
+			Mathf.Clamp (this.blueSliderValue, 0, 100);
 		} else if (color == "green") {
 
 			this.greenSliderValue += increaseAmount;
+			Mathf.Clamp (this.greenSliderValue, 0, 100);
 		} else if (color == "orange") {
 
 			this.orangeSliderValue += increaseAmount;
+			Mathf.Clamp (this.orangeSliderValue, 0, 100);
 		}
 	}
 
