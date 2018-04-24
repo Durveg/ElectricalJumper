@@ -21,6 +21,7 @@ public class BoardColumn : MonoBehaviour {
 	private SpriteRenderer signalSprite;
 
 	private bool flaggedColumn = false;
+	private bool isSignalingFalling = false;
 
 	private Vector2 rayOriginPoint;
 	[SerializeField]
@@ -47,6 +48,8 @@ public class BoardColumn : MonoBehaviour {
 
 		this.signalSprite.transform.position = this.nextSpawnPosition;
 		this.signalSprite.enabled = signalEnabled;
+
+		this.isSignalingFalling = signalEnabled;
 
 		this.spriteRenderer.enabled = signalEnabled;
 		this.spriteRenderer.color = signalEnabled ? this.targetingColor : normalColor;
@@ -100,7 +103,11 @@ public class BoardColumn : MonoBehaviour {
 
 	private void CheckCenterBounds(Collider2D other) {
 
-		if (this.collider != null) {
+		if (this.isSignalingFalling == true) {
+
+			this.spriteRenderer.enabled = true;
+		}
+		else if (this.collider != null) {
 
 			if (this.collider.bounds.Contains (other.transform.position)) {
 

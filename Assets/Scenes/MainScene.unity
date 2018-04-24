@@ -30540,11 +30540,11 @@ MonoBehaviour:
   - blue
   - green
   - orange
-  timeToMaxSpawnSpeedSec: 240
-  timeBetweenSpawnsMax: 0.8
-  timeBetweenSpawnsMin: 0
-  timeToMinDelay: 240
-  delayBeforeFallMax: 1
+  timeToMaxSpawnSpeedSec: 300
+  timeBetweenSpawnsMax: 1
+  timeBetweenSpawnsMin: 0.5
+  timeToMinDelay: 300
+  delayBeforeFallMax: 1.5
   delayBeforeFallMin: 0.75
   gemPrefabString: Gem
   columnPrefabString: BoardColumn
@@ -35760,7 +35760,7 @@ MonoBehaviour:
   blueColor: {r: 0, g: 0.7411765, b: 0.8901961, a: 1}
   greenColor: {r: 0, g: 1, b: 0.047058824, a: 1}
   orangeColor: {r: 1, g: 0.7647059, b: 0, a: 1}
-  powerLevelDegradeRate: 0.75
+  powerLevelDegradeRate: 0.33
   match3: 8
   match4: 12
   match5: 18
