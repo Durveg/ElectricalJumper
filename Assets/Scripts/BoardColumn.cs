@@ -123,37 +123,43 @@ public class BoardColumn : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if (GameManager.instance.gameIsOver == false) {
+			
+			RaycastHit2D[] hits = Physics2D.RaycastAll (this.rayOriginPoint, Vector2.up, 500, gemLayerMask);
+			Debug.DrawRay (this.rayOriginPoint, Vector2.up, Color.green);
 
-		RaycastHit2D[] hits = Physics2D.RaycastAll (this.rayOriginPoint, Vector2.up, 500, gemLayerMask);
-		Debug.DrawRay (this.rayOriginPoint, Vector2.up, Color.green);
+			int index = 0;
+			foreach (RaycastHit2D thisHit in hits) {
 
-		int index = 0;
-		foreach(RaycastHit2D thisHit in hits) {
+				Gem gem = thisHit.transform.GetComponent<Gem> ();
+				if (gem != null) {
 
-			Gem gem = thisHit.transform.GetComponent<Gem> ();
-			if (gem != null) {
+					if (gem.isFalling) {
 
-				if (gem.isFalling) {
+						gem.SetFallToPosition (new Vector2 (this.transform.position.x, this.slotHeights [index]));
+					} else if (gem.fallToPosition.y > this.slotHeights [index]) {
 
-					gem.SetFallToPosition (new Vector2 (this.transform.position.x, this.slotHeights [index]));
-				} 
-				else if (gem.fallToPosition.y > this.slotHeights [index]) {
+						gem.SetFallToPosition (new Vector2 (this.transform.position.x, this.slotHeights [index]));
+					}
+				}
 
-					gem.SetFallToPosition(new Vector2(this.transform.position.x, this.slotHeights [index]));
+				index++;
+				if (index >= 10) {
+
+					break;
 				}
 			}
-			index++;
-		}
 
-		if (index >= slotHeights.Length) {
+			if (index >= slotHeights.Length) {
 
-			GameManager.instance.GameOver ();
-		}
+				GameManager.instance.GameOver ();
+			} else {
+				this.nextSpawnPosition = new Vector2 (this.transform.position.x, this.slotHeights [index]);
+				if (this.signalSprite.enabled == true) {
 
-		this.nextSpawnPosition = new Vector2 (this.transform.position.x, this.slotHeights [index]);
-		if (this.signalSprite.enabled == true) {
-
-			this.signalSprite.transform.position = this.nextSpawnPosition;
+					this.signalSprite.transform.position = this.nextSpawnPosition;
+				}
+			}
 		}
 	}
 }

@@ -62,9 +62,48 @@ public class HighlightNearby : MonoBehaviour {
 		bounds.Expand (skinWidth * -2);
 
 		raycastOrigins.middleLeft = new Vector2(bounds.min.x,  bounds.center.y);
-		raycastOrigins.middleRight = new Vector2(bounds.min.x,  bounds.center.y);
+		raycastOrigins.middleRight = new Vector2(bounds.max.x,  bounds.center.y);
 
 		raycastOrigins.bottomMiddle = new Vector2 (bounds.center.x, bounds.min.y);
+	}
+
+	private void SelectRightCollider(RaycastHit2D right) {
+
+		Gem rightGem = right.transform.GetComponent<Gem> ();
+
+		if (playerData.highlightedGem != null) {
+
+			playerData.highlightedGem.DisableHighlighting ();
+		}
+
+		playerData.highlightedGem = rightGem;
+		rightGem.EnableHighlighting ();
+	}
+
+	private void SelectLeftCollider(RaycastHit2D left) {
+
+		Gem leftGem = left.transform.GetComponent<Gem> ();
+
+		if (playerData.highlightedGem != null) {
+
+			playerData.highlightedGem.DisableHighlighting ();
+		}
+
+		playerData.highlightedGem = leftGem;
+		leftGem.EnableHighlighting ();
+	}
+
+	private void SelectDownCollider(RaycastHit2D down) {
+
+		Gem downGem = down.transform.GetComponent<Gem> ();
+
+		if (playerData.highlightedGem != null) {
+
+			playerData.highlightedGem.DisableHighlighting ();
+		}
+
+		playerData.highlightedGem = downGem;
+		downGem.EnableHighlighting ();
 	}
 
 	// Update is called once per frame
@@ -76,40 +115,39 @@ public class HighlightNearby : MonoBehaviour {
 		RaycastHit2D right = RightCollision(raySize);
 		RaycastHit2D down = DownCollision(raySize);
 
-		if (playerData.facingDir == -1 && controller.collisions.left && left.collider != null) {
+		if (Input.GetKey (KeyCode.DownArrow) || Input.GetKey (KeyCode.S)) {
 
-			Gem leftGem = left.transform.GetComponent<Gem> ();
+			if (down.collider != null) {
 
-			if (playerData.highlightedGem != null) {
-
-				playerData.highlightedGem.DisableHighlighting ();
+				SelectDownCollider (down);
 			}
+		} 
+		else if (Input.GetKey (KeyCode.LeftArrow) || Input.GetKey (KeyCode.A)) {
 
-			playerData.highlightedGem = leftGem;
-			leftGem.EnableHighlighting ();
-		} else if (playerData.facingDir == 1 && controller.collisions.right && right.collider != null) {
+			if(controller.collisions.left && left.collider != null) {
 
-			Gem rightGem = right.transform.GetComponent<Gem> ();
-
-			if (playerData.highlightedGem != null) {
-
-				playerData.highlightedGem.DisableHighlighting ();
+				SelectLeftCollider (left);
 			}
+		} 
+		else if (Input.GetKey (KeyCode.RightArrow) || Input.GetKey (KeyCode.D)) {
 
-			playerData.highlightedGem = rightGem;
-			rightGem.EnableHighlighting ();
-		} else if (down.collider != null) {
-
-			Gem downGem = down.transform.GetComponent<Gem> ();
-
-			if (playerData.highlightedGem != null) {
-
-				playerData.highlightedGem.DisableHighlighting ();
+			if (controller.collisions.right && right.collider != null) {
+				SelectRightCollider (right);
 			}
+		}
+		else if (playerData.facingDir == -1 && controller.collisions.left && left.collider != null) {
 
-			playerData.highlightedGem = downGem;
-			downGem.EnableHighlighting ();
-		} else {
+			SelectLeftCollider(left);
+		} 
+		else if (playerData.facingDir == 1 && controller.collisions.right && right.collider != null) {
+
+			SelectRightCollider(right);
+		} 
+		else if (down.collider != null) {
+
+			SelectDownCollider (down);
+		} 
+		else {
 
 			if (playerData.highlightedGem != null) {
 

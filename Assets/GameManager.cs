@@ -38,12 +38,14 @@ public class GameManager : MonoBehaviour {
 	[SerializeField]
 	private Canvas GameOverUI;
 
+	public bool gameIsOver = false;
 	public int score = 0;
 
 	private bool gameOverPlayed = false;
 
 	public void GameOver() {
 
+		this.gameIsOver = true;
 		SoundManager.PlayGameOver();
 
 		inGameUI.gameObject.SetActive (false);

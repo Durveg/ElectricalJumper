@@ -19186,7 +19186,7 @@ MonoBehaviour:
   throwItemVelocity: 10
   throwItemDisplacementHeight: 0.75
   wallSlideSpeedMax: 3
-  wallStickTime: 0.2
+  wallStickTime: 0.1
   wallJumpClimb: {x: 3, y: 20}
   wallJumpOff: {x: 8, y: 10}
   wallLeap: {x: 12, y: 15}
@@ -19249,7 +19249,7 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 1073741824
-  raySize: 0.75
+  raySize: 0.1
 --- !u!212 &1143571434
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -35771,4 +35771,5 @@ MonoBehaviour:
   orangeSliderValue: 100
   inGameUI: {fileID: 371283130}
   GameOverUI: {fileID: 458574701}
+  gameIsOver: 0
   score: 0
